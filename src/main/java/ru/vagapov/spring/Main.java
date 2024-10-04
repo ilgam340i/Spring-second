@@ -14,7 +14,7 @@ public class Main {
         UserService userService = ctx.getBean(UserService.class);
 
         //Здесь можете протестировать создание своих пользователей
-        userService.createUser(new User());
+        userService.createUser(new User(1L,"Isyangulov","ilham","ii@mail", "qwerty",29));
         userService.createUser(new User());
         userService.createUser(new User());
         userService.createUser(new User());

@@ -1,22 +1,26 @@
 package ru.vagapov.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
+import ru.vagapov.spring.mapper.UserMapper;
 import ru.vagapov.spring.service.UserService;
 
 import java.util.List;
-
-
+/**
+ * Отправка и прием HTTP-запросов
+ */
+@Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
+    private UserEntity user;
+    @Autowired
+    private UserMapper userMapper;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -38,6 +42,25 @@ public class UserController {
         userService.createUser(user);
         return "redirect:/";
     }
+    @DeleteMapping("/id" )
+    public String deleteUser(@ModelAttribute("user") User user) {
+        userService.deleteUser(user.getId());
+        return "redirect:/";
+    }
+    @PutMapping("/{id}")
+    public String editUser(@ModelAttribute("user") User user, @PathVariable Long id) {
+        user.setId(id);
+        return "redirect:/";
+    }
+    @PutMapping("/{id}")
+    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User user) {
+        user.setId(id);
+        userMapper.toEntity(user);
+        updateUser(id, user);
+        return "redirect:/";
+    }
+
+
 
     //добавьте url на удаление = /delete который принимает id пользака, после перебрасывает на основную страницу
     //добавьте url на редактирование = /edit который принимает id пользака и перебрасывает на страницу с редактированием (новая страница)
