@@ -10,17 +10,22 @@ import ru.vagapov.spring.mapper.UserMapper;
 import ru.vagapov.spring.service.UserService;
 
 import java.util.List;
+
 /**
- * Отправка и прием HTTP-запросов
+ * Отправка и прием HTTP-запросов, использует DTO
  */
 @Controller
 public class UserController {
 
     @Autowired
-    private UserService userService;
-    private UserEntity user;
-    @Autowired
-    private UserMapper userMapper;
+    private final UserService userService;
+    private final UserMapper userMapper;
+
+    private UserController(UserService userService, UserMapper userMapper) {
+        this.userService = userService;
+        this.userMapper = userMapper;
+
+    }
 
     @GetMapping("/")
     public String home(Model model) {
@@ -32,7 +37,7 @@ public class UserController {
 
     @RequestMapping("/new")
     public String newUserForm(Model model) {
-        UserEntity user = new UserEntity();
+        UserMapper user = new UserMapper();
         model.addAttribute("user", user);
         return "new_user";
     }
@@ -42,24 +47,26 @@ public class UserController {
         userService.createUser(user);
         return "redirect:/";
     }
-    @DeleteMapping("/id" )
+
+    @DeleteMapping("/id")
     public String deleteUser(@ModelAttribute("user") User user) {
         userService.deleteUser(user.getId());
         return "redirect:/";
     }
+
     @PutMapping("/{id}")
     public String editUser(@ModelAttribute("user") User user, @PathVariable Long id) {
         user.setId(id);
-        return "redirect:/";
+        return "redirect:/edit/" + id;
     }
+
     @PutMapping("/{id}")
-    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User user) {
+    public String updateUser(@PathVariable Long id, @ModelAttribute("id") User user) {
         user.setId(id);
         userMapper.toEntity(user);
         updateUser(id, user);
         return "redirect:/";
     }
-
 
 
     //добавьте url на удаление = /delete который принимает id пользака, после перебрасывает на основную страницу

@@ -3,8 +3,12 @@ package ru.vagapov.spring.mapper;
 import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Преобразование Entity в User, и наоборот.
+ * Преобразование UserEntity в UserDto, и наоборот.
  */
 @Component
 public class UserMapper {
@@ -28,5 +32,12 @@ public class UserMapper {
         userEntity.setLastName(user.getLastName());
         userEntity.setAge(user.getAge());
         return userEntity;
+    }
+    public List<User> toDtoList(List<UserEntity> userEntityList) {
+        List<User> userList = new ArrayList<>();
+        for (UserEntity userEntity : userEntityList) {
+            userList.add(toDto(userEntity));
+        }
+        return userList;
     }
 }

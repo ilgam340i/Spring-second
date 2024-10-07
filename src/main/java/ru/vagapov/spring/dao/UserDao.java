@@ -3,7 +3,9 @@ package ru.vagapov.spring.dao;
 import ru.vagapov.spring.entity.UserEntity;
 
 import java.util.List;
-
+/**
+ * интерфейс для для CRUD-операций с БД
+ */
 public interface UserDao {
 
     void createUser(UserEntity user);

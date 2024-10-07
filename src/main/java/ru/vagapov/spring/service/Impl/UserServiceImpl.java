@@ -10,9 +10,8 @@ import ru.vagapov.spring.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
- * Реализация бизнес-логики на основе маппера и DAO-слоя
+ * Реализация UserService,работает с Mapper
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -52,20 +51,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         List <UserEntity> userEntityList = userDao.findAll();
-        List<User> userList = new ArrayList<User>();
-        for (UserEntity userEntity : userEntityList) {
-            userList.add(userMapper.toDto(userEntity));
-        }
-        return userList;
+        return userMapper.toDtoList(userEntityList);
     }
 
     @Override
     public List<User> findAllUsersByLastName(String lastName) {
         List<UserEntity> userEntityList= userDao.findUsersByLastName(lastName);
-        List<User> usersList = new ArrayList<>();
-        for (UserEntity userEntity : userEntityList) {
-            usersList.add(userMapper.toDto(userEntity));
-        }
-        return usersList;
+        return userMapper.toDtoList(userEntityList);
     }
 }
