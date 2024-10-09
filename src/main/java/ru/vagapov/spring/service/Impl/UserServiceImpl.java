@@ -10,9 +10,7 @@ import ru.vagapov.spring.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Реализация UserService,работает с Mapper
- */
+
 @Service
 public class UserServiceImpl implements UserService {
 

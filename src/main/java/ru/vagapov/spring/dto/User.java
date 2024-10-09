@@ -3,15 +3,20 @@ package ru.vagapov.spring.dto;
 import java.util.Objects;
 
 /**
- * POJO
+ * DTO, используется для уменьшения запросов к БД у Service
  */
 public class User {
-
+    // id
     private Long id;
+    // имя пользователя
     private String userName;
+    // фамилия пользователя
     private String lastName;
+    // электронная почта пользователя
     private String email;
+    // пароль пользователя
     private String password;
+    //возраст пользователя
     private Integer age;
 
     public User() {}

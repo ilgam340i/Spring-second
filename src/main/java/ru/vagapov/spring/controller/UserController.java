@@ -37,7 +37,7 @@ public class UserController {
 
     @RequestMapping("/new")
     public String newUserForm(Model model) {
-        UserMapper user = new UserMapper();
+        User user = new User();
         model.addAttribute("user", user);
         return "new_user";
     }
