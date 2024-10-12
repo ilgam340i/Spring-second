@@ -11,23 +11,31 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-@Transactional
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public void createUser(UserEntity user) {
         entityManager.persist(user);
     }
 
     @Override
+    @Transactional
     public void updateUser(UserEntity user, Long id) {
+        entityManager.find(UserEntity.class, id);
+        user.setUserName(user.getUserName());
+        user.setPassword(user.getPassword());
+        user.setEmail(user.getEmail());
+        user.setAge(user.getAge());
+        user.setLastName(user.getLastName());
         entityManager.merge(user);
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long id) {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);

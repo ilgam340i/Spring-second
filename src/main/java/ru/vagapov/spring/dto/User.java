@@ -3,7 +3,7 @@ package ru.vagapov.spring.dto;
 import java.util.Objects;
 
 /**
- * DTO, используется для уменьшения запросов к БД у Service
+ * Модель пользователя, используется для уменьшения запросов к БД у слоя бизнес-логики
  */
 public class User {
     // id

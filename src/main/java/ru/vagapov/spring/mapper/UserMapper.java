@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Преобразование UserEntity в Dto, и наоборот.
+ * Преобразование пользователя в модель пользователя, и наоборот.
  */
 @Component
 public class UserMapper {

@@ -4,35 +4,35 @@ import ru.vagapov.spring.entity.UserEntity;
 
 import java.util.List;
 /**
- * слой для  CRUD-операций с БД, работа с UserEntity
+ * Слой для CRUD-операций с пользователями из базы данных.
  */
 public interface UserDao {
     /*
-    * создание UserEntity, принимает UserEntity, ничего не возвращает
+    * Создание пользователя, принимает пользователя, ничего не возвращает
      */
     void createUser(UserEntity user);
     /*
-     * поиск UserEntity по его id, принимает id , возвращает UserEntity
+     * Поиск пользователя по его id, принимает id, возвращает пользователя
      */
     UserEntity findUserById(Long id);
     /*
-     * поиск UserEntity по его username, принимает username , возвращает UserEntity
+     * Поиск пользователя по его username, принимает username, возвращает пользователя
      */
     UserEntity findUserByUsername(String username);
     /*
-     * обновление  UserEntity, принимает UserEntity и id, ничего не возвращает
+     * Обновление пользователя, принимает пользователя и id, ничего не возвращает
      */
     void updateUser(UserEntity user, Long id);
     /*
-     * удаление UserEntity, принимает id, ничего не возвращает
+     * Удаление пользователя, принимает id, ничего не возвращает
      */
     void deleteUser(Long id);
     /*
-     * список всех UserEntity, ничего не принимает, возвращает список всех UserEntity
+     * Список всех пользователей, ничего не принимает, возвращает список всех пользователей
      */
     List<UserEntity> findAll();
     /*
-     * список всех UserEntity с определенной lastName, принимает lastName, возвращает список  UserEntity
+     * Список всех пользователей с определенной lastName, принимает lastName, возвращает список пользователей
      */
     List<UserEntity> findUsersByLastName(String lastName);
 

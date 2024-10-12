@@ -4,21 +4,41 @@ import ru.vagapov.spring.dto.User;
 
 import java.util.List;
 /**
- * Реализация бизнес-логики, помимо методов DAO, могут быть и свои методы, работа с DTO
+ * Реализация бизнес-логики, помимо методов слоя работы с базами данных, могут быть и свои методы, работа с моделью пользователя
  */
 public interface UserService {
-    // создание User, принимает User, ничего не возвращает
+    /**
+     * Создание модели пользователя
+     * @param user
+     */
     void createUser(User user);
-    //обновление  User, принимает User и id, ничего не возвращает
+    /**
+     * Обновление модели пользователя
+     * @param user,id
+     */
     void updateUser(User user, Long id);
-    //удаление User, принимает id, ничего не возвращает
+    /*
+     * Удаление модели пользователя, принимает id, ничего не возвращает
+     * @param id
+     */
     void deleteUser(Long id);
-    //поиск User по его id, принимает id , возвращает User
+    /*
+     * Поиск модели пользователя по его id, принимает id, возвращает модель пользователя
+     * @param id
+     */
     User findById(Long id);
-    //поиск User по его username, принимает username , возвращает User
+    /*
+     * Поиск модели пользователя по его username, принимает username, возвращает модель пользователя
+     * @param userName
+     */
     User findUserByUserName(String userName);
-    //список всех User, ничего не принимает, возвращает список всех User
+    /*
+     * Список всех моделей пользователей, ничего не принимает, возвращает список всех моделей пользователей
+     */
     List<User> findAll();
-    //список всех User с определенной lastName, принимает lastName, возвращает список  User
+    /*
+     * Список всех моделей пользователей с определенной lastName, принимает lastName, возвращает список моделей пользователе
+     * @param lastName
+     */
     List<User> findAllUsersByLastName(String lastName);
 }

@@ -17,10 +17,10 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    @Autowired
     private final UserService userService;
     private final UserMapper userMapper;
 
+    @Autowired
     private UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
@@ -29,7 +29,6 @@ public class UserController {
 
     @GetMapping("/")
     public String home(Model model) {
-        userService.createUser(null);
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "index";
