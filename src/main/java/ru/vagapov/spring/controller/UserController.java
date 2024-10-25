@@ -18,13 +18,10 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final UserMapper userMapper;
 
     @Autowired
-    private UserController(UserService userService, UserMapper userMapper) {
+    private UserController(UserService userService) {
         this.userService = userService;
-        this.userMapper = userMapper;
-
     }
 
     @GetMapping("/")
@@ -34,9 +31,9 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping("/new")
+    @GetMapping("/new")
     public String newUserForm(Model model) {
-        User user = new User();
+        UserEntity user = new UserEntity();
         model.addAttribute("user", user);
         return "new_user";
     }
@@ -45,28 +42,26 @@ public class UserController {
     public String saveUser(@ModelAttribute("user") User user) {
         userService.createUser(user);
         return "redirect:/";
+
     }
 
-    @DeleteMapping("/id")
-    public String deleteUser(@ModelAttribute("user") User user) {
-        userService.deleteUser(user.getId());
+    @PostMapping(value = "/{id}/delete")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
         return "redirect:/";
     }
 
-    @PutMapping("/{id}")
-    public String editUser(@ModelAttribute("user") User user, @PathVariable Long id) {
-        user.setId(id);
-        return "redirect:/edit/" + id;
+    @RequestMapping(value = "/{id}/edituser", method = RequestMethod.GET)
+    public String editUser(Model model, @PathVariable Long id) {
+        model.addAttribute("user", userService.findById(id));
+        return "edit";
     }
 
-    @PutMapping("/{id}")
-    public String updateUser(@PathVariable Long id, @ModelAttribute("id") User user) {
-        user.setId(id);
-        userMapper.toEntity(user);
-        updateUser(id, user);
+    @PostMapping(value = "/{id}")
+    public String edit(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+        userService.updateUser(user, id);
         return "redirect:/";
     }
-
 
     //добавьте url на удаление = /delete который принимает id пользака, после перебрасывает на основную страницу
     //добавьте url на редактирование = /edit который принимает id пользака и перебрасывает на страницу с редактированием (новая страница)

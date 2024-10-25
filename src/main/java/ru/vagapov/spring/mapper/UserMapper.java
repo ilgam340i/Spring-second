@@ -15,6 +15,7 @@ public class UserMapper {
 
     public User toDto(UserEntity userEntity) {
         User user = new User();
+        user.setId(userEntity.getId());
         user.setUserName(userEntity.getUserName());
         user.setPassword(userEntity.getPassword());
         user.setEmail(userEntity.getEmail());
@@ -26,6 +27,7 @@ public class UserMapper {
 
     public UserEntity toEntity(User user) {
         UserEntity userEntity = new UserEntity();
+        userEntity.setId(user.getId());
         userEntity.setUserName(user.getUserName());
         userEntity.setPassword(user.getPassword());
         userEntity.setEmail(user.getEmail());

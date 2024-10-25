@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void deleteUser(Long id) {
-        User user = entityManager.find(User.class, id);
+        UserEntity user = entityManager.find(UserEntity.class, id);
         entityManager.remove(user);
     }
 
