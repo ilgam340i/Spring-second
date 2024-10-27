@@ -3,11 +3,11 @@ package ru.vagapov.spring.dao.Impl;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.dao.UserDao;
-import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -62,7 +62,25 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserEntity> findUsersByLastName(String lastName) {
+    public List findUsersByLastName(String lastName) {
         return entityManager.createQuery("from UserEntity where lastName = :lastName").setParameter("lastName", lastName).getResultList();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List findUsersByAnyWord(String keyword) {
+        List<UserEntity> userEntityList = findAll();
+        List<UserEntity> userEntityList2 = new ArrayList<UserEntity>();
+        for (UserEntity userEntity : userEntityList) {
+            if (userEntity.getUserName().toLowerCase().contains(keyword.toLowerCase())) {
+                userEntityList2.add(userEntity);
+            }
+            if (userEntity.getLastName().toLowerCase().contains(keyword.toLowerCase())) {
+                userEntityList2.add(userEntity);
+            }
+        }
+        return userEntityList2;
+    }
+
 }
+

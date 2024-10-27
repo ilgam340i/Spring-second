@@ -11,7 +11,7 @@
     <h2>Users</h2>
     <h3>Search by any field</h3>
     <form method="get" action="search">
-        <input type="text" name="keyword" />
+        <input type="text" th:name="keyWord" th:value="${keyWord}" />
         <input type="submit" value="Search" />
     </form>
     <h3><a href="/new">New User</a></h3>

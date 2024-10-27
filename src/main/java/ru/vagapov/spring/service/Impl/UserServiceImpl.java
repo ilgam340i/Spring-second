@@ -57,4 +57,10 @@ public class UserServiceImpl implements UserService {
         List<UserEntity> userEntityList= userDao.findUsersByLastName(lastName);
         return userMapper.toDtoList(userEntityList);
     }
+
+    @Override
+    public List<User> findUsersByAnyWord ( String keyWord){
+        List<UserEntity> userEntityList= userDao.findUsersByAnyWord(keyWord);
+        return userMapper.toDtoList(userEntityList);
+    }
 }

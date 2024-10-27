@@ -15,15 +15,19 @@
       <th>Name</th>
       <th>LastName</th>
       <th>E-mail</th>
+      <th>Password</th>
+      <th>Age</th>
     </tr>
     <tr th:if="${users.isEmpty()}">
       <td colspan="4"> There are no such users </td>
     </tr>
     <tr th:each="user : ${users}">
       <td><span th:text="${user.id}"> Id </span></td>
-      <td><span th:text="${user.name}"> Name </span></td>
-      <td><span th:text="${user.lastname}"> LastName </span></td>
-      <td><span th:text="${user.email}"> Email </span></td>
+      <td><span th:text="${user.getUserName()}"> Name </span></td>
+      <td><span th:text="${user.getLastName()}"> LastName </span></td>
+      <td><span th:text="${user.getEmail()}"> Email </span></td>
+      <td><span th:text="${user.getPassword()}"> Password </span></td>
+      <td><span th:text="${user.getAge()}"> Age </span></td>
     </tr>
   </table>
 </div>

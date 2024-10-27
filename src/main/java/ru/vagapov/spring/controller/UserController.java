@@ -31,6 +31,13 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/search")
+    public String search( @RequestParam (name="keyWord")String keyWord, Model model) {
+        List<User> users = userService.findUsersByAnyWord(keyWord);
+        model.addAttribute("users", users);
+        return "users";
+    }
+
     @GetMapping("/new")
     public String newUserForm(Model model) {
         UserEntity user = new UserEntity();

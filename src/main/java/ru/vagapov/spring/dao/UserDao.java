@@ -1,5 +1,6 @@
 package ru.vagapov.spring.dao;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.entity.UserEntity;
 
 import java.util.List;
@@ -53,5 +54,9 @@ public interface UserDao {
      * @return List<UserEntity> список пользователей c фамилией lastname
      */
     List<UserEntity> findUsersByLastName(String lastName);
-
+    /**
+     * Список всех пользователей с заданным полем
+     * @return List<UserEntity> список пользователей c заданным полем
+     */
+    List<UserEntity> findUsersByAnyWord(String keyword);
 }

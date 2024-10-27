@@ -1,6 +1,7 @@
 package ru.vagapov.spring.service;
 
 import ru.vagapov.spring.dto.User;
+import ru.vagapov.spring.entity.UserEntity;
 
 import java.util.List;
 
@@ -54,4 +55,9 @@ public interface UserService {
      * @return List<UserEntity> список пользователей c фамилией lastname
      */
     List<User> findAllUsersByLastName(String lastName);
+    /**
+     * Список всех пользователей с заданным полем
+     * @return List<User> список пользователей c заданным полем
+     */
+    List<User> findUsersByAnyWord( String keyWord);
 }
