@@ -55,8 +55,8 @@ public interface UserDao {
      */
     List<UserEntity> findUsersByLastName(String lastName);
     /**
-     * Список всех пользователей с заданным полем
-     * @return List<UserEntity> список пользователей c заданным полем
+     * Список всех пользователей, содержащих заданное слово в имени или фамилии
+     * @return List<UserEntity> список пользователей
      */
     List<UserEntity> findUsersByAnyWord(String keyword);
 }

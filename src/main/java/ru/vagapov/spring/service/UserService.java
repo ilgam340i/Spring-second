@@ -56,8 +56,8 @@ public interface UserService {
      */
     List<User> findAllUsersByLastName(String lastName);
     /**
-     * Список всех пользователей с заданным полем
-     * @return List<User> список пользователей c заданным полем
+     * Список всех пользователей, содержащих заданное слово в имени или фамилии
+     * @return List<User> список пользователей
      */
     List<User> findUsersByAnyWord( String keyWord);
 }
