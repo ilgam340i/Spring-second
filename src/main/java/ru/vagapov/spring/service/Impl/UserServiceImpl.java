@@ -1,6 +1,5 @@
 package ru.vagapov.spring.service.Impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.vagapov.spring.dao.UserDao;
 import ru.vagapov.spring.dto.User;
@@ -8,7 +7,6 @@ import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.mapper.UserMapper;
 import ru.vagapov.spring.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
