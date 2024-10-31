@@ -6,8 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
-
-import ru.vagapov.spring.service.UserService;
+import ru.vagapov.spring.service.Impl.UserService;
 
 import java.util.List;
 
