@@ -5,8 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.dao.UserDao;
 import ru.vagapov.spring.entity.UserEntity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 

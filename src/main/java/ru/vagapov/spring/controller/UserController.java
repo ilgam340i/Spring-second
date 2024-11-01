@@ -52,7 +52,7 @@ public class UserController {
 
     }
 
-    @PostMapping(value = "/{id}/delete")
+    @DeleteMapping(value = "/{id}/delete")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/";
@@ -64,7 +64,7 @@ public class UserController {
         return "edit";
     }
 
-    @PostMapping(value = "/{id}")
+    @PatchMapping(value = "/{id}")
     public String edit(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
         userService.updateUser(user, id);
         return "redirect:/";
