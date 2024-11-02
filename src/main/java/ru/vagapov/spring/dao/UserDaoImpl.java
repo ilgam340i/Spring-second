@@ -1,8 +1,7 @@
-package ru.vagapov.spring.dao.Impl;
+package ru.vagapov.spring.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.vagapov.spring.dao.UserDao;
 import ru.vagapov.spring.entity.UserEntity;
 
 import jakarta.persistence.EntityManager;
@@ -49,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional(readOnly = true)
-    public UserEntity findUserByUsername(String username) {
+    public UserEntity findUserByUserName(String username) {
         return entityManager.createQuery("SELECT u from UserEntity u WHERE u.userName = :username", UserEntity.class).
                 setParameter("username", username).getSingleResult();
     }

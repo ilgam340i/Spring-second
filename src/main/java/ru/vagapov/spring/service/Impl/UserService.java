@@ -1,20 +1,24 @@
 package ru.vagapov.spring.service.Impl;
 
 import org.springframework.stereotype.Service;
-import ru.vagapov.spring.repository.UserDaoJPA;
+
+import ru.vagapov.spring.dao.UserDao;
+import ru.vagapov.spring.dao.UserDaoImpl;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.mapper.UserMapper;
+import ru.vagapov.spring.repository.UserDaoJPA;
+
 import java.util.List;
 
 @Service
 public class UserService {
 
-    private UserDaoJPA userDao;
-    private UserMapper userMapper;
+    private final UserDao userDao;
+    private final UserMapper userMapper;
 
-    public UserService(UserDaoJPA userDao, UserMapper userMapper) {
-        this.userDao = userDao;
+    public UserService(UserDaoImpl userDao, UserMapper userMapper) {
+        this.userDao=userDao;
         this.userMapper = userMapper;
     }
 
@@ -51,13 +55,13 @@ public class UserService {
 
 
     public List<User> findAllUsersByLastName(String lastName) {
-        List<UserEntity> userEntityList = userDao.findUserByLastName(lastName);
+        List<UserEntity> userEntityList = userDao.findUsersByLastName(lastName);
         return userMapper.toDtoList(userEntityList);
     }
 
 
     public List<User> findUsersByAnyWord(String keyWord) {
-        List<UserEntity> userEntityList = userDao.findUserByAnyKeyWord(keyWord);
+        List<UserEntity> userEntityList = userDao.findUsersByAnyWord(keyWord);
         return userMapper.toDtoList(userEntityList);
     }
 }
