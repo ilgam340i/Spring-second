@@ -1,5 +1,6 @@
 package ru.vagapov.spring.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Реализация бизнес-логики, помимо методов слоя работы с базами данных, могут быть и свои методы, работа с моделью пользователя
  */
-public interface UserService {
+public interface UserService extends UserDetailsService {
     /**
      * Создание модели пользователя
      *

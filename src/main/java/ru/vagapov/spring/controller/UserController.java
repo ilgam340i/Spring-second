@@ -1,74 +1,38 @@
 package ru.vagapov.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
-import ru.vagapov.spring.entity.UserEntity;
-import ru.vagapov.spring.service.Impl.UserService;
-
-
-import java.util.List;
+import ru.vagapov.spring.service.Impl.UserServiceImpl;
 
 /**
  * Отправка и прием HTTP-запросов, использует DTO
  */
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    private UserController(UserService userService) {
+    private UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String home(Model model) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
-        return "index";
-    }
-
-    @GetMapping("/search")
-    public String search(@RequestParam(name = "keyWord") String keyWord, Model model) {
-        List<User> users = userService.findUsersByAnyWord(keyWord);
-        model.addAttribute("users", users);
-        return "users";
-    }
-
-    @GetMapping("/new")
-    public String newUserForm(Model model) {
-        UserEntity user = new UserEntity();
+    @GetMapping
+    public String info( Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userService.findUserByUserName(name);
         model.addAttribute("user", user);
-        return "new_user";
-    }
+        return "user";}
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute("user") User user) {
-        userService.createUser(user);
-        return "redirect:/";
-
-    }
-
-    @DeleteMapping(value = "/{id}/delete")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/";
-    }
-
-    @RequestMapping(value = "/{id}/edituser", method = RequestMethod.GET)
-    public String editUser(Model model, @PathVariable Long id) {
-        model.addAttribute("user", userService.findById(id));
-        return "edit";
-    }
-
-    @PatchMapping(value = "/{id}")
-    public String edit(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
-        userService.updateUser(user, id);
-        return "redirect:/";
-    }
 
     //добавьте url на удаление = /delete который принимает id пользака, после перебрасывает на основную страницу
     //добавьте url на редактирование = /edit который принимает id пользака и перебрасывает на страницу с редактированием (новая страница)

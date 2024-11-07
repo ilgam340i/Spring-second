@@ -1,4 +1,4 @@
-package ru.vagapov.spring.dao;
+package ru.vagapov.spring.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

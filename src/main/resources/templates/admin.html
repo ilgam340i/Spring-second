@@ -10,7 +10,7 @@
 <div align="center">
     <h2>Users</h2>
     <h3>Search by any field</h3>
-    <form method="get" action="search">
+    <form method="get" action=admin/search>
         <input type="text" th:name="keyWord" th:value="${keyWord}" />
         <input type="submit" value="Search" />
     </form>
@@ -36,17 +36,18 @@
             <td><span th:text="${user.getPassword()}"> Password </span></td>
             <td><span th:text="${user.getAge()}"> Age </span></td>
             <td>
-                <form th:action="@{/{id}/edituser(id=${user.getId()})}" th:method="GET">
+                <form th:action="@{admin/{id}/edituser(id=${user.getId()})}"  th:method="GET">
                     <input type="hidden" name="id" th:value="${user.getId()}" />
                     <input type="submit" value="Edit" class="btn btn-danger" />
                 </form>
-                <form th:action="@{/{id}/delete(id=${user.getId()})}" th:method="DELETE">
+                <form th:action="@{admin/{id}/delete(id=${user.getId()})}" th:method="DELETE">
                     <input type="hidden" name="id" th:value="${user.id}" />
                     <input type="submit" value="Delete" class="btn btn-danger" />
                 </form>
             </td>
         </tr>
     </table>
+    <h3><a href="/logout">logout</a></h3>
 </div>
 </body>
 </html>

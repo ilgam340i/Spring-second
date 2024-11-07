@@ -1,16 +1,15 @@
 package ru.vagapov.spring.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.util.Objects;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +29,12 @@ public class UserEntity {
 
     @Column(name = "age")
     private Integer age;
+
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name ="users_id"),
+            inverseJoinColumns = @JoinColumn(name="roles_id"))
+    private Set<RoleEntity> roles;
 
     public UserEntity() {}
 
@@ -74,8 +79,25 @@ public class UserEntity {
         this.email = email;
     }
 
+    /**
+     * @return
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return getRoles();
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getUsername() {
+        return "";
     }
 
     public void setPassword(String password) {
@@ -88,6 +110,9 @@ public class UserEntity {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+    public Set<RoleEntity> getRoles() {
+        return roles;
     }
 
     @Override

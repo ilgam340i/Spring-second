@@ -1,6 +1,7 @@
-package ru.vagapov.spring.dao;
+package ru.vagapov.spring.repository;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.vagapov.spring.entity.UserEntity;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Слой для CRUD-операций с пользователями из базы данных.
  */
-public interface UserDao {
+public interface UserDao  {
     /**
      * Создание пользователя
      * @param user пользователь
