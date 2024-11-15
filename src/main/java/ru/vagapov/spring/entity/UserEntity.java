@@ -9,7 +9,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class UserEntity implements UserDetails {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +32,12 @@ public class UserEntity implements UserDetails {
 
     @ManyToMany
     @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name ="users_id"),
-            inverseJoinColumns = @JoinColumn(name="roles_id"))
-    private Set<RoleEntity> roles;
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id"))
+    private List<RoleEntity> roles;
 
-    public UserEntity() {}
+    public UserEntity() {
+    }
 
     public UserEntity(Long id, String userName, String lastName, String email, String password, Integer age) {
         this.id = id;
@@ -79,25 +80,8 @@ public class UserEntity implements UserDetails {
         this.email = email;
     }
 
-    /**
-     * @return
-     */
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        return getRoles();
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    /**
-     * @return
-     */
-    @Override
-    public String getUsername() {
-        return "";
     }
 
     public void setPassword(String password) {
@@ -111,8 +95,13 @@ public class UserEntity implements UserDetails {
     public void setAge(Integer age) {
         this.age = age;
     }
-    public Set<RoleEntity> getRoles() {
+
+    public List<RoleEntity> getRoles() {
         return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     @Override

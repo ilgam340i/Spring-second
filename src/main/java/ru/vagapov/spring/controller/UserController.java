@@ -1,15 +1,12 @@
 package ru.vagapov.spring.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
-import ru.vagapov.spring.service.Impl.UserServiceImpl;
+import ru.vagapov.spring.service.UserService;
 
 /**
  * Отправка и прием HTTP-запросов, использует DTO
@@ -18,10 +15,9 @@ import ru.vagapov.spring.service.Impl.UserServiceImpl;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    @Autowired
-    private UserController(UserServiceImpl userService) {
+    private UserController(UserService userService) {
         this.userService = userService;
     }
 

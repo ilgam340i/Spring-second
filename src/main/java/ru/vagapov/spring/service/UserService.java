@@ -19,10 +19,9 @@ public interface UserService extends UserDetailsService {
 
     /**
      * Обновление пользователя
-     * @param id   идентификатор пользователя
      * @param user пользователь
      */
-    void updateUser(User user, Long id);
+    void updateUser(User user);
 
     /**
      * Удаление пользователя

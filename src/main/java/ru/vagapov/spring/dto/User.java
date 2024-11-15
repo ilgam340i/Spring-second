@@ -1,11 +1,16 @@
 package ru.vagapov.spring.dto;
 
-import java.util.Objects;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import ru.vagapov.spring.entity.RoleEntity;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Модель пользователя, используется для уменьшения запросов к БД у слоя бизнес-логики
  */
-public class User {
+public class User implements UserDetails {
     // id
     private Long id;
     // имя пользователя
@@ -19,7 +24,10 @@ public class User {
     //возраст пользователя
     private Integer age;
 
-    public User() {}
+    private List<Role> roles;
+
+    public User() {
+    }
 
     public User(Long id, String userName, String lastName, String email, String password, Integer age) {
         this.id = id;
@@ -28,6 +36,24 @@ public class User {
         this.email = email;
         this.password = password;
         this.age = age;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public List<String> roleToString() {
+        List<Role> rolestostring = new ArrayList<>();
+        for (Role role : roles) {
+            role.getName();
+            rolestostring.add(role);
+        }
+        return rolestostring.stream().map(Role::getName).collect(Collectors.toList());
+
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -46,8 +72,24 @@ public class User {
         return email;
     }
 
+    /**
+     * @return
+     */
+    @Override
+    public List<ru.vagapov.spring.dto.Role> getAuthorities() {
+        return getRoles();
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getUsername() {
+        return userName;
     }
 
     public void setId(Long id) {
@@ -77,6 +119,7 @@ public class User {
     public void setAge(Integer age) {
         this.age = age;
     }
+
 
     @Override
     public boolean equals(Object o) {
