@@ -3,7 +3,6 @@ package ru.vagapov.spring.mapper;
 import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +19,7 @@ public class UserMapper {
 
     public RoleMapper roleMapper;
 
+
     public User toDto(Optional<UserEntity> userEntity) {
         User user = new User();
         user.setId(userEntity.get().getId());
@@ -29,9 +29,8 @@ public class UserMapper {
         user.setLastName(userEntity.get().getLastName());
         user.setAge(userEntity.get().getAge());
         user.setRoles(roleMapper.toDto(userEntity.get().getRoles()));
-
+        user.setStringroles(roleMapper.rolesToString(userEntity.get().getRoles()));
         return user;
-
     }
 
     public UserEntity toEntity(User user) {

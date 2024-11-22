@@ -36,7 +36,7 @@
             <td><span th:text="${user.getEmail()}"> Email </span></td>
             <td><span th:text="${user.getPassword()}"> Password </span></td>
             <td><span th:text="${user.getAge()}"> Age </span></td>
-            <td><span th:text="${user.roleToString()}"> Role </span></td>
+            <td><span th:text="${user.getStringroles()}"> Role </span></td>
             
             <td>
                 <form th:action="@{admin/{id}/edituser(id=${user.getId()})}"  th:method="GET">

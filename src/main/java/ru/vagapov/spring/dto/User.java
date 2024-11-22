@@ -1,12 +1,7 @@
 package ru.vagapov.spring.dto;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.vagapov.spring.entity.RoleEntity;
-
 import java.util.*;
-import java.util.stream.Collectors;
-
 /**
  * Модель пользователя, используется для уменьшения запросов к БД у слоя бизнес-логики
  */
@@ -23,8 +18,10 @@ public class User implements UserDetails {
     private String password;
     //возраст пользователя
     private Integer age;
-
+    //список ролей
     private List<Role> roles;
+    //список имен ролей
+    private List<String> stringroles;
 
     public User() {
     }
@@ -42,18 +39,16 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public List<String> roleToString() {
-        List<Role> rolestostring = new ArrayList<>();
-        for (Role role : roles) {
-            role.getName();
-            rolestostring.add(role);
-        }
-        return rolestostring.stream().map(Role::getName).collect(Collectors.toList());
-
+    public List<String> getStringroles() {
+        return stringroles;
     }
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public void setStringroles(List<String> stringroles) {
+        this.stringroles = stringroles;
     }
 
     public Long getId() {
@@ -73,7 +68,7 @@ public class User implements UserDetails {
     }
 
     /**
-     * @return
+     * @return список ролей пользователя
      */
     @Override
     public List<ru.vagapov.spring.dto.Role> getAuthorities() {
@@ -85,7 +80,7 @@ public class User implements UserDetails {
     }
 
     /**
-     * @return
+     * @return имя пользователя
      */
     @Override
     public String getUsername() {

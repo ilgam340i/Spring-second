@@ -17,7 +17,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import ru.vagapov.spring.controller.AdminController;
 
 @Configuration
-@ComponentScan(basePackageClasses = AdminController.class)
 @EnableWebSecurity
 public class WebSecurityConfig {
 
