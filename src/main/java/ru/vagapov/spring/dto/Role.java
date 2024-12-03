@@ -6,9 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
  * Модель роли пользователя, используется для уменьшения запросов к БД у слоя бизнес-логики
  */
 public class Role implements GrantedAuthority {
-    // id
+    // идентификатор
     private Long id;
-    // имя роли
+    // название роли
     private String name;
 
     public Role() {
@@ -30,10 +30,6 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-
-    /**
-     * @return список ролей
-     */
     @Override
     public String getAuthority() {
         return getName();

@@ -1,9 +1,6 @@
 package ru.vagapov.spring.repository;
 
-
-import org.springframework.data.jpa.repository.JpaRepository;
 import ru.vagapov.spring.entity.UserEntity;
-
 import java.util.List;
 
 /**

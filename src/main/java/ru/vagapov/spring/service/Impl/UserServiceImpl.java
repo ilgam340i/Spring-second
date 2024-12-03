@@ -1,28 +1,20 @@
 package ru.vagapov.spring.service.Impl;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.dto.User;
-import ru.vagapov.spring.entity.RoleEntity;
 import ru.vagapov.spring.entity.UserEntity;
-import ru.vagapov.spring.mapper.RoleMapper;
 import ru.vagapov.spring.mapper.UserMapper;
-import ru.vagapov.spring.repository.RoleRepository;
 import ru.vagapov.spring.repository.UserRepository;
 import ru.vagapov.spring.service.UserService;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userDao;
@@ -80,13 +72,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDtoList(userEntityList2);
     }
 
-    /**
-     * @param username the username identifying the user whose data is required.
-     * @return
-     * @throws UsernameNotFoundException
-     */
     @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findUserByUserName(username);
         if (user == null) {
@@ -94,9 +80,4 @@ public class UserServiceImpl implements UserService {
         }
         return  user;
     }
-
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<RoleEntity> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
-
 }

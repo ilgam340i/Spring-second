@@ -3,10 +3,12 @@ package ru.vagapov.spring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.vagapov.spring.dto.Role;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.service.UserService;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -54,7 +56,13 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/{id}/edituser", method = RequestMethod.GET)
-    public String editUser(Model model, @PathVariable Long id) {
+    public String editUser( Model model, @PathVariable Long id) {
+        List<String> rOles = new ArrayList<String>();
+        List < Role> rOleList = userService.findById(id).getRoles();
+        for (Role role : rOleList) {
+            rOles.add(role.getName());
+        }
+        model.addAttribute("user",rOles);
         model.addAttribute("user", userService.findById(id));
         return "edit";
     }

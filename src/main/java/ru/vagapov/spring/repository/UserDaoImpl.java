@@ -3,7 +3,6 @@ package ru.vagapov.spring.repository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.entity.UserEntity;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.ArrayList;

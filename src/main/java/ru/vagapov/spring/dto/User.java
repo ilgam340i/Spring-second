@@ -6,7 +6,7 @@ import java.util.*;
  * Модель пользователя, используется для уменьшения запросов к БД у слоя бизнес-логики
  */
 public class User implements UserDetails {
-    // id
+    // идентификатор
     private Long id;
     // имя пользователя
     private String userName;
@@ -20,19 +20,20 @@ public class User implements UserDetails {
     private Integer age;
     //список ролей
     private List<Role> roles;
-    //список имен ролей
+    //список ролей в строковом формате
     private List<String> stringroles;
 
     public User() {
     }
 
-    public User(Long id, String userName, String lastName, String email, String password, Integer age) {
+    public User(Long id, String userName, String lastName, String email, String password, Integer age, List <Role> roles) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.age = age;
+        this.roles = roles;
     }
 
     public List<Role> getRoles() {
@@ -67,11 +68,8 @@ public class User implements UserDetails {
         return email;
     }
 
-    /**
-     * @return список ролей пользователя
-     */
     @Override
-    public List<ru.vagapov.spring.dto.Role> getAuthorities() {
+    public List<Role> getAuthorities() {
         return getRoles();
     }
 
@@ -79,9 +77,7 @@ public class User implements UserDetails {
         return password;
     }
 
-    /**
-     * @return имя пользователя
-     */
+
     @Override
     public String getUsername() {
         return userName;

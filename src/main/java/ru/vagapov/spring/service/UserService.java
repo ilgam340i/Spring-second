@@ -2,8 +2,6 @@ package ru.vagapov.spring.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.vagapov.spring.dto.User;
-import ru.vagapov.spring.entity.UserEntity;
-
 import java.util.List;
 
 /**
