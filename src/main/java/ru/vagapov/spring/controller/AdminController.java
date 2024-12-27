@@ -5,19 +5,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.Role;
 import ru.vagapov.spring.dto.User;
+import ru.vagapov.spring.service.Impl.RoleServiceImpl;
 import ru.vagapov.spring.service.UserService;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
+    private final RoleServiceImpl roleService;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RoleServiceImpl roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
 
@@ -57,13 +59,10 @@ public class AdminController {
 
     @RequestMapping(value = "/{id}/edituser", method = RequestMethod.GET)
     public String editUser( Model model, @PathVariable Long id) {
-        List<String> rOles = new ArrayList<String>();
-        List < Role> rOleList = userService.findById(id).getRoles();
-        for (Role role : rOleList) {
-            rOles.add(role.getName());
-        }
-        model.addAttribute("user",rOles);
-        model.addAttribute("user", userService.findById(id));
+        User user = userService.findById(id);
+        List < Role> roleList = roleService.findAll();
+        model.addAttribute("user", user);
+        model.addAttribute("roles", roleList);
         return "edit";
     }
 

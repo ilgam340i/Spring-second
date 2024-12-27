@@ -23,10 +23,12 @@ public class User implements UserDetails {
     //список ролей в строковом формате
     private List<String> stringroles;
 
+    private List<Book> books;
+
     public User() {
     }
 
-    public User(Long id, String userName, String lastName, String email, String password, Integer age, List <Role> roles) {
+    public User(Long id, String userName, String lastName, String email, String password, Integer age, List <Role> roles, List<String> stringroles, List<Book> books) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
@@ -34,10 +36,19 @@ public class User implements UserDetails {
         this.password = password;
         this.age = age;
         this.roles = roles;
+        this.books = books;
     }
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     public List<String> getStringroles() {
@@ -50,6 +61,15 @@ public class User implements UserDetails {
 
     public void setStringroles(List<String> stringroles) {
         this.stringroles = stringroles;
+    }
+
+    public String rolesToString() {
+        StringBuilder sb = new StringBuilder();
+        for (String stringroles : stringroles) {
+            sb.append(stringroles.replace("ROLE_"," "));
+        }
+        return sb.toString();
+
     }
 
     public Long getId() {

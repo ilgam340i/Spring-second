@@ -8,7 +8,7 @@
 <body>
 <div align="center">
   <h2>Found the following users:</h2>
-  <h3><a href="/">Return</a></h3>
+  <h3><a href="/admin">Return</a></h3>
   <table border="1" cellpadding="5">
     <tr>
       <th>Id</th>
@@ -17,6 +17,7 @@
       <th>E-mail</th>
       <th>Password</th>
       <th>Age</th>
+      <th>Role</th>
     </tr>
     <tr th:if="${users.isEmpty()}">
       <td colspan="4"> There are no such users </td>
@@ -28,6 +29,7 @@
       <td><span th:text="${user.getEmail()}"> Email </span></td>
       <td><span th:text="${user.getPassword()}"> Password </span></td>
       <td><span th:text="${user.getAge()}"> Age </span></td>
+      <td><span th:text="${user.rolesToString()}"> Role </span></td>
     </tr>
   </table>
 </div>

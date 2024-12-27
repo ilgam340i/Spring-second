@@ -3,7 +3,7 @@ package ru.vagapov.spring.mapper;
 import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
-import ru.vagapov.spring.service.RoleService;
+import ru.vagapov.spring.service.Impl.RoleServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +14,9 @@ import java.util.Optional;
 @Component
 public class UserMapper {
 
-    public RoleService roleService;
+    public final RoleServiceImpl roleService;
 
-    public UserMapper(RoleService roleService) {
+    public UserMapper(RoleServiceImpl roleService) {
         this.roleService = roleService;
 
     }
