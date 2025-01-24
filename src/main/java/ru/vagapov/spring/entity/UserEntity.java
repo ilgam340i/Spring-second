@@ -1,6 +1,7 @@
 package ru.vagapov.spring.entity;
 
 import jakarta.persistence.*;
+
 import java.util.*;
 
 @Entity
@@ -30,12 +31,12 @@ public class UserEntity {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
-    private List<RoleEntity> roles;
+    private Set<RoleEntity> roles;
 
     @ManyToMany
-    @JoinTable(name="users_books",
-    joinColumns = @JoinColumn(name = "users_id"),
-    inverseJoinColumns = @JoinColumn(name = "books_id"))
+    @JoinTable(name = "users_books",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "books_id"))
     private List<BookEntity> books;
 
     public UserEntity() {
@@ -98,11 +99,11 @@ public class UserEntity {
         this.age = age;
     }
 
-    public List<RoleEntity> getRoles() {
+    public Set<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleEntity> roles) {
+    public void setRoles(Set<RoleEntity> roles) {
         this.roles = roles;
     }
 

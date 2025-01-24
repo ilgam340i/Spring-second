@@ -9,6 +9,7 @@ import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.mapper.UserMapper;
 import ru.vagapov.spring.repository.UserRepository;
 import ru.vagapov.spring.service.UserService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,44 +24,52 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
         this.userMapper = userMapper;
     }
+
     @Override
     @Transactional
     public void createUser(User user) {
         userDao.save(userMapper.toEntity(user));
     }
+
     @Override
     @Transactional
     public void updateUser(User user) {
         UserEntity userEntity = userMapper.toEntity(user);
         userDao.save(userEntity);
     }
+
     @Override
     @Transactional
     public void deleteUser(Long id) {
         userDao.deleteById(id);
     }
+
     @Override
     @Transactional(readOnly = true)
     public User findById(Long id) {
         return userMapper.toDto(userDao.findById(id));
     }
+
     @Override
     @Transactional(readOnly = true)
     public User findUserByUserName(String userName) {
         return userMapper.toDto(Optional.ofNullable((userDao.findByUserName(userName))));
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<User> findAll() {
         List<UserEntity> userEntityList = userDao.findAll();
         return userMapper.toDtoList(userEntityList);
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<User> findAllUsersByLastName(String lastName) {
         List<UserEntity> userEntityList = userDao.findByLastName(lastName);
         return userMapper.toDtoList(userEntityList);
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<User> findUsersByAnyWord(String keyword) {
@@ -74,8 +83,6 @@ public class UserServiceImpl implements UserService {
                 userEntityList2.add(userEntity);
             }
         }
-
-
         return userMapper.toDtoList(userEntityList2);
     }
 
@@ -86,6 +93,6 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return  user;
+        return user;
     }
 }

@@ -33,8 +33,14 @@
                 <td><input type="text" th:field="*{age}" /></td>
             </tr>
             <tr>
-                <td><label th:text="Role" /></td>
-                <td><input type="text" th:field="*{stringroles}" /></td>
+                <td><label th:text="Roles" /></td>
+                <td>
+                    <input type="checkbox" name = "roles"
+                           th:each="role:${roles}"
+                           th:text="${role.getName().replace('ROLE_', '')}"
+                           th:value="${role.getName()}"
+                           th:field="*{roles}"
+                    />
             </tr>
             <tr>
                 <td><input type="submit" value="Save" /></td>

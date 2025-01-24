@@ -1,7 +1,9 @@
 package ru.vagapov.spring.dto;
 
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.*;
+
 /**
  * Модель пользователя, используется для уменьшения запросов к БД у слоя бизнес-логики
  */
@@ -19,16 +21,16 @@ public class User implements UserDetails {
     //возраст пользователя
     private Integer age;
     //список ролей
-    private List<Role> roles;
+    private Set<Role> roles;
     //список ролей в строковом формате
-    private List<String> stringroles;
-
+    private List<String> stringRoles;
+    //список книг пользователя
     private List<Book> books;
 
     public User() {
     }
 
-    public User(Long id, String userName, String lastName, String email, String password, Integer age, List <Role> roles, List<String> stringroles, List<Book> books) {
+    public User(Long id, String userName, String lastName, String email, String password, Integer age, Set<Role> roles, List<String> stringRoles, List<Book> books) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
@@ -37,9 +39,10 @@ public class User implements UserDetails {
         this.age = age;
         this.roles = roles;
         this.books = books;
+        this.stringRoles = stringRoles;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
@@ -51,22 +54,22 @@ public class User implements UserDetails {
         this.books = books;
     }
 
-    public List<String> getStringroles() {
-        return stringroles;
+    public List<String> getStringRoles() {
+        return stringRoles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-    public void setStringroles(List<String> stringroles) {
-        this.stringroles = stringroles;
+    public void setStringRoles(List<String> stringRoles) {
+        this.stringRoles = stringRoles;
     }
 
     public String rolesToString() {
         StringBuilder sb = new StringBuilder();
-        for (String stringroles : stringroles) {
-            sb.append(stringroles.replace("ROLE_"," "));
+        for (String stringRoles : stringRoles) {
+            sb.append(stringRoles.replace("ROLE_", " "));
         }
         return sb.toString();
 
@@ -89,7 +92,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public List<Role> getAuthorities() {
+    public Set<Role> getAuthorities() {
         return getRoles();
     }
 

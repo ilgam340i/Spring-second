@@ -22,7 +22,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.postgresql:postgresql")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-
+    implementation ("org.jboss.logging:jboss-logging:3.5.3.Final")
 
     compileOnly("javax.servlet:javax.servlet-api:4.0.1")
 

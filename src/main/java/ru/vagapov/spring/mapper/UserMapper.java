@@ -3,7 +3,8 @@ package ru.vagapov.spring.mapper;
 import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
-import ru.vagapov.spring.service.Impl.RoleServiceImpl;
+import ru.vagapov.spring.service.RoleService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +15,9 @@ import java.util.Optional;
 @Component
 public class UserMapper {
 
-    public final RoleServiceImpl roleService;
+    public final RoleService roleService;
 
-    public UserMapper(RoleServiceImpl roleService) {
+    public UserMapper(RoleService roleService) {
         this.roleService = roleService;
 
     }
@@ -29,8 +30,8 @@ public class UserMapper {
         user.setEmail(userEntity.get().getEmail());
         user.setLastName(userEntity.get().getLastName());
         user.setAge(userEntity.get().getAge());
-        user.setRoles(roleService.toDto(userEntity.get().getRoles()));
-        user.setStringroles(roleService.rolesToDto(userEntity.get().getRoles()));
+        user.setRoles(roleService.listOfRoleEntityToDto(userEntity.get().getRoles()));
+        user.setStringRoles(roleService.rolesToDto(userEntity.get().getRoles()));
         return user;
     }
 
@@ -42,7 +43,7 @@ public class UserMapper {
         userEntity.setEmail(user.getEmail());
         userEntity.setLastName(user.getLastName());
         userEntity.setAge(user.getAge());
-        userEntity.setRoles(roleService.dtoToRoles(user.getStringroles()));
+        userEntity.setRoles(roleService.dtoToRoles(user.getStringRoles()));
         return userEntity;
     }
 

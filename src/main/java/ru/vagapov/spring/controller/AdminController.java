@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.Role;
 import ru.vagapov.spring.dto.User;
-import ru.vagapov.spring.service.Impl.RoleServiceImpl;
+import ru.vagapov.spring.service.RoleService;
 import ru.vagapov.spring.service.UserService;
 
 
@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
-    private final RoleServiceImpl roleService;
+    private final RoleService roleService;
 
-    public AdminController(UserService userService, RoleServiceImpl roleService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
@@ -40,7 +40,9 @@ public class AdminController {
     @GetMapping("/new")
     public String newUserForm(Model model) {
         User user = new User();
+        List < Role> roleList = roleService.findAll();
         model.addAttribute("user", user);
+        model.addAttribute("roles", roleList);
         return "new_user";
     }
 
